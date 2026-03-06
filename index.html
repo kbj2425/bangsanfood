@@ -30,7 +30,6 @@
             position: relative;
         }
 
-        /* 배경 빛망울 */
         body::before, body::after {
             content: '';
             position: fixed;
@@ -61,7 +60,6 @@
             to   { transform: translate(50px,-40px) scale(1.15); }
         }
 
-        /* 배경 패턴 */
         .bg-pattern {
             position: fixed; inset: 0; z-index: 0; opacity: 0.06;
             background-image:
@@ -69,7 +67,7 @@
                 repeating-linear-gradient(-60deg, transparent, transparent 40px, rgba(255,255,255,0.5) 40px, rgba(255,255,255,0.5) 41px);
         }
 
-        /* 카드 */
+        /* ── 카드 ── */
         .card {
             position: relative;
             z-index: 10;
@@ -93,7 +91,7 @@
             to   { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* 헤더 */
+        /* ── 헤더 ── */
         header {
             display: flex;
             flex-direction: column;
@@ -102,55 +100,26 @@
             padding-bottom: 20px;
             border-bottom: 1px solid rgba(255,255,255,0.15);
         }
-
-        .logo-wrap {
-            width: 88px; height: 88px;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .logo-wrap img {
-            width: 88px; height: 88px;
-            object-fit: contain;
-            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.35));
-        }
-
+        .logo-wrap { width: 88px; height: 88px; display: flex; align-items: center; justify-content: center; }
+        .logo-wrap img { width: 88px; height: 88px; object-fit: contain; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.35)); }
         .school-name {
-            font-size: 0.72rem;
-            font-family: 'DM Mono', monospace;
-            letter-spacing: 3px;
-            color: var(--gold-light);
-            opacity: 0.85;
-            text-transform: uppercase;
+            font-size: 0.72rem; font-family: 'DM Mono', monospace;
+            letter-spacing: 3px; color: var(--gold-light); opacity: 0.85; text-transform: uppercase;
         }
+        h1 { font-size: 1.65rem; font-weight: 900; color: var(--white); letter-spacing: -0.5px; }
 
-        h1 {
-            font-size: 1.65rem;
-            font-weight: 900;
-            color: var(--white);
-            letter-spacing: -0.5px;
-        }
-
-        /* 날짜 네비게이션 */
+        /* ── 날짜 네비게이션 ── */
         .date-nav {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            margin-top: 4px;
-        }
-
-        .nav-btn {
-            width: 32px; height: 32px;
-            flex-shrink: 0;
-            border: 1px solid rgba(212,160,23,0.4);
-            border-radius: 50%;
-            background: rgba(212,160,23,0.2);
-            color: var(--gold-light);
-            font-size: 1rem;
-            cursor: pointer;
             display: flex; align-items: center; justify-content: center;
-            transition: background 0.2s, transform 0.15s;
-            padding: 0;
+            gap: 10px; width: 100%; margin-top: 4px;
+        }
+        .nav-btn {
+            width: 32px; height: 32px; flex-shrink: 0;
+            border: 1px solid rgba(212,160,23,0.4); border-radius: 50%;
+            background: rgba(212,160,23,0.2); color: var(--gold-light);
+            font-size: 1rem; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s, transform 0.15s; padding: 0;
         }
         .nav-btn:hover  { background: rgba(212,160,23,0.38); transform: scale(1.1); }
         .nav-btn:active { transform: scale(0.95); }
@@ -159,53 +128,42 @@
 
         .date-badge {
             flex: 1;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            padding: 7px 12px;
-            border-radius: 20px;
-            background: rgba(212,160,23,0.2);
-            border: 1px solid rgba(212,160,23,0.4);
-            color: var(--gold-light);
-            font-size: 0.82rem;
-            font-family: 'DM Mono', monospace;
-            letter-spacing: 0.5px;
+            display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+            padding: 7px 12px; border-radius: 20px;
+            background: rgba(212,160,23,0.2); border: 1px solid rgba(212,160,23,0.4);
+            color: var(--gold-light); font-size: 0.82rem;
+            font-family: 'DM Mono', monospace; letter-spacing: 0.5px;
         }
-        .day-tag {
-            font-size: 0.78rem;
-            font-weight: 700;
-            opacity: 0.9;
-        }
+        .day-tag { font-size: 0.78rem; font-weight: 700; opacity: 0.9; }
 
-        /* 초기화 버튼 행 — 공간 고정으로 레이아웃 안 흔들림 */
+        /* ── 초기화 버튼 ── */
         .reset-row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 34px;
-            margin-top: 6px;
+            display: flex; align-items: center; justify-content: center;
+            height: 34px; margin-top: 6px;
         }
         .reset-btn {
             visibility: hidden;
             padding: 7px 22px;
-            border: 1px solid rgba(212,160,23,0.5);
-            border-radius: 16px;
-            background: rgba(212,160,23,0.15);
-            color: var(--gold-light);
-            font-size: 0.8rem;
-            font-family: 'DM Mono', monospace;
-            letter-spacing: 1px;
-            cursor: pointer;
+            border: 1px solid rgba(212,160,23,0.5); border-radius: 16px;
+            background: rgba(212,160,23,0.15); color: var(--gold-light);
+            font-size: 0.8rem; font-family: 'DM Mono', monospace;
+            letter-spacing: 1px; cursor: pointer;
             transition: background 0.2s, transform 0.15s;
         }
-        .reset-btn.visible  { visibility: visible; }
-        .reset-btn:hover    { background: rgba(212,160,23,0.32); transform: scale(1.05); }
-        .reset-btn:active   { transform: scale(0.96); }
+        .reset-btn.visible { visibility: visible; }
+        .reset-btn:hover   { background: rgba(212,160,23,0.32); transform: scale(1.05); }
+        .reset-btn:active  { transform: scale(0.96); }
 
-        /* 메뉴 박스 */
-        .menu-box {
+        /* ── 메뉴 박스 래퍼 (페이지 넘김 클립) ── */
+        .menu-wrap {
             margin: 14px 0 0;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* ── 메뉴 박스 ── */
+        .menu-box {
             padding: 22px 18px;
             border-radius: 20px;
             background: rgba(0,0,0,0.2);
@@ -214,52 +172,66 @@
             display: flex; align-items: center; justify-content: center;
             box-shadow: inset 0 2px 12px rgba(0,0,0,0.2);
             position: relative; overflow: hidden;
-            transition: opacity 0.25s;
         }
-        .menu-box.fading { opacity: 0.3; }
         .menu-box::before {
             content: '';
             position: absolute; top: 0; left: 0; right: 0; height: 1px;
             background: linear-gradient(90deg, transparent, rgba(240,192,64,0.6), transparent);
         }
 
+        /* 페이지 넘김 애니메이션 */
+        .menu-box.slide-left-out  { animation: slideLeftOut  0.22s ease-in  both; }
+        .menu-box.slide-right-out { animation: slideRightOut 0.22s ease-in  both; }
+        .menu-box.slide-left-in   { animation: slideLeftIn   0.28s cubic-bezier(0.22,1,0.36,1) both; }
+        .menu-box.slide-right-in  { animation: slideRightIn  0.28s cubic-bezier(0.22,1,0.36,1) both; }
+
+        @keyframes slideLeftOut  { to   { transform: translateX(-60px); opacity: 0; } }
+        @keyframes slideRightOut { to   { transform: translateX( 60px); opacity: 0; } }
+        @keyframes slideLeftIn   { from { transform: translateX( 60px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideRightIn  { from { transform: translateX(-60px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+        /* ── 메뉴 텍스트 ── */
         #menu-text {
             color: var(--white);
-            font-size: 1rem;
-            font-weight: 700;
-            line-height: 2.1;
-            white-space: pre-wrap;
-            text-align: center;
-            letter-spacing: 0.2px;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+            font-size: 1rem; font-weight: 700; line-height: 2.1;
+            white-space: pre-wrap; text-align: center;
+            letter-spacing: 0.2px; text-shadow: 0 1px 4px rgba(0,0,0,0.3);
         }
 
-        /* 로딩 */
-        .loading {
-            color: rgba(255,255,255,0.45) !important;
-            font-size: 0.88rem !important;
-            font-weight: 400 !important;
-            animation: pulse 1.8s ease-in-out infinite;
+        /* ── 스켈레톤 ── */
+        .skeleton-wrap {
+            display: flex; flex-direction: column;
+            align-items: center; gap: 10px; width: 100%; padding: 4px 8px;
         }
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50%       { opacity: 0.2; }
+        .skeleton-line {
+            height: 14px; border-radius: 7px;
+            background: linear-gradient(90deg,
+                rgba(255,255,255,0.06) 0%,
+                rgba(255,255,255,0.14) 40%,
+                rgba(255,255,255,0.06) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 1.4s ease-in-out infinite;
+        }
+        .skeleton-line:nth-child(1) { width: 72%; }
+        .skeleton-line:nth-child(2) { width: 58%; }
+        .skeleton-line:nth-child(3) { width: 78%; }
+        .skeleton-line:nth-child(4) { width: 50%; }
+        .skeleton-line:nth-child(5) { width: 65%; }
+        .skeleton-line:nth-child(6) { width: 55%; animation-delay: 0.1s; }
+
+        @keyframes shimmer {
+            0%   { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
 
-        /* 푸터 */
+        /* ── 푸터 ── */
         footer {
-            display: flex;
-            justify-content: center;
-            padding-top: 16px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            margin-top: 16px;
+            display: flex; justify-content: center;
+            padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 16px;
         }
         footer p {
-            font-size: 0.65rem;
-            font-family: 'DM Mono', monospace;
-            letter-spacing: 3px;
-            color: rgba(255,255,255,0.3);
-            text-transform: uppercase;
+            font-size: 0.65rem; font-family: 'DM Mono', monospace;
+            letter-spacing: 3px; color: rgba(255,255,255,0.3); text-transform: uppercase;
         }
 
         @media (max-width: 400px) {
@@ -281,7 +253,6 @@
         </header>
 
         <main>
-            <!-- 날짜 네비게이션 -->
             <div class="date-nav">
                 <button class="nav-btn" id="btn-prev">&#8592;</button>
                 <div class="date-badge">
@@ -292,14 +263,23 @@
                 <button class="nav-btn" id="btn-next">&#8594;</button>
             </div>
 
-            <!-- 초기화 버튼 -->
             <div class="reset-row">
                 <button class="reset-btn" id="btn-reset">초기화</button>
             </div>
 
-            <!-- 메뉴 -->
-            <div class="menu-box" id="menu-box">
-                <p id="menu-text" class="loading">잠시만 기다려봐, 밥 뭐 나오나 보고 올게...</p>
+            <div class="menu-wrap">
+                <div class="menu-box" id="menu-box">
+                    <!-- 스켈레톤 초기 상태 -->
+                    <div class="skeleton-wrap" id="skeleton">
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line"></div>
+                    </div>
+                    <p id="menu-text" style="display:none;"></p>
+                </div>
             </div>
         </main>
 
@@ -314,17 +294,15 @@
             OFFICE_CODE: 'B10',
             SCHOOL_CODE: '7010590'
         };
-        const MEAL_CODE = '2';
-        const DAYS      = ['일', '월', '화', '수', '목', '금', '토'];
+        const MEAL_CODE  = '2';
+        const DAYS       = ['일', '월', '화', '수', '목', '금', '토'];
         const MAX_OFFSET = 5;
 
-        let dayOffset = 0;
+        let dayOffset  = 0;
+        let isAnimating = false;
 
         /* ── 유틸 ── */
-        function isWeekday(date) {
-            const d = date.getDay();
-            return d !== 0 && d !== 6;
-        }
+        function isWeekday(date) { const d = date.getDay(); return d !== 0 && d !== 6; }
 
         function getBaseDate() {
             const now = new Date();
@@ -337,10 +315,7 @@
             const base = getBaseDate();
             const step = offset >= 0 ? 1 : -1;
             let count  = Math.abs(offset);
-            while (count > 0) {
-                base.setDate(base.getDate() + step);
-                if (isWeekday(base)) count--;
-            }
+            while (count > 0) { base.setDate(base.getDate() + step); if (isWeekday(base)) count--; }
             return base;
         }
 
@@ -364,13 +339,10 @@
                 `?KEY=${CONFIG.API_KEY}&Type=json` +
                 `&ATPT_OFCDC_SC_CODE=${CONFIG.OFFICE_CODE}` +
                 `&SD_SCHUL_CODE=${CONFIG.SCHOOL_CODE}` +
-                `&MLSV_YMD=${yyyymmdd}` +
-                `&MMEAL_SC_CODE=${MEAL_CODE}`;
-
+                `&MLSV_YMD=${yyyymmdd}&MMEAL_SC_CODE=${MEAL_CODE}`;
             const res  = await fetch(url);
             if (!res.ok) throw new Error('Network error');
             const data = await res.json();
-
             if (data.mealServiceDietInfo) {
                 const raw = data.mealServiceDietInfo[1].row[0].DDISH_NM;
                 return raw
@@ -384,52 +356,88 @@
             return null;
         }
 
+        /* ── 애니메이션 헬퍼 ── */
+        function animateClass(el, cls) {
+            return new Promise(resolve => {
+                el.classList.add(cls);
+                el.addEventListener('animationend', () => {
+                    el.classList.remove(cls);
+                    resolve();
+                }, { once: true });
+            });
+        }
+
+        /* ── 스켈레톤 표시/숨김 ── */
+        function showSkeleton() {
+            document.getElementById('skeleton').style.display = 'flex';
+            const mt = document.getElementById('menu-text');
+            mt.style.display = 'none';
+            mt.innerText = '';
+        }
+
+        function showMenu(text) {
+            document.getElementById('skeleton').style.display = 'none';
+            const mt = document.getElementById('menu-text');
+            mt.style.display = 'block';
+            mt.innerText = text;
+        }
+
         /* ── 메인 로드 ── */
-        async function loadMeal(offset) {
+        async function loadMeal(offset, direction = 'none') {
+            if (isAnimating) return;
+            isAnimating = true;
+
+            const prevOffset = dayOffset;
             dayOffset = offset;
             updateNavButtons();
 
-            const display  = document.getElementById('menu-text');
             const menuBox  = document.getElementById('menu-box');
             const dateEl   = document.getElementById('date-display');
             const dayEl    = document.getElementById('day-display');
             const resetBtn = document.getElementById('btn-reset');
 
-            menuBox.classList.add('fading');
-            display.className = 'loading';
-            display.innerText = '불러오는 중...';
-
             const target  = getTargetDate(offset);
             const ymd     = formatDate(target);
-            const mm      = ymd.slice(4, 6);
-            const dd      = ymd.slice(6, 8);
+            const mm      = ymd.slice(4,6);
+            const dd      = ymd.slice(6,8);
             const dayName = DAYS[target.getDay()];
 
+            // 날짜 & 타이틀 즉시 업데이트
             dateEl.innerText = `${ymd.slice(0,4)}년 ${mm}월 ${dd}일`;
             dayEl.innerText  = `(${dayName})`;
-
-            // 탭 타이틀 동기화
-            document.title = `방산고 급식 | ${mm}월 ${dd}일 (${dayName})`;
-
-            // 초기화 버튼: offset != 0 일 때만 표시
+            document.title   = `방산고 급식 | ${mm}월 ${dd}일 (${dayName})`;
             resetBtn.className = offset !== 0 ? 'reset-btn visible' : 'reset-btn';
 
-            let menu = null;
-            try { menu = await fetchMeal(target); } catch(e) { console.error(e); }
+            // 1) 나가는 애니메이션 + 스켈레톤
+            if (direction !== 'none') {
+                const outClass = direction === 'next' ? 'slide-left-out' : 'slide-right-out';
+                await animateClass(menuBox, outClass);
+            }
 
-            menuBox.classList.remove('fading');
-            display.className = '';
-            display.innerText = menu ?? '이 날은 급식 정보가 없어요 🌿\n(방학 · 공휴일 · 휴업일)';
+            showSkeleton();
+
+            // 2) 들어오는 애니메이션 시작과 동시에 API 호출
+            const inClass = direction === 'next' ? 'slide-left-in'
+                          : direction === 'prev' ? 'slide-right-in'
+                          : 'slide-left-in';
+
+            const [menu] = await Promise.all([
+                fetchMeal(target).catch(() => null),
+                direction !== 'none' ? animateClass(menuBox, inClass) : Promise.resolve()
+            ]);
+
+            showMenu(menu ?? '이 날은 급식 정보가 없어요 🌿\n(방학 · 공휴일 · 휴업일)');
+            isAnimating = false;
         }
 
         /* ── 이벤트 ── */
         document.getElementById('btn-prev').addEventListener('click', () => {
-            if (dayOffset > -MAX_OFFSET) loadMeal(dayOffset - 1);
+            if (dayOffset > -MAX_OFFSET) loadMeal(dayOffset - 1, 'prev');
         });
         document.getElementById('btn-next').addEventListener('click', () => {
-            if (dayOffset < MAX_OFFSET) loadMeal(dayOffset + 1);
+            if (dayOffset < MAX_OFFSET)  loadMeal(dayOffset + 1, 'next');
         });
-        document.getElementById('btn-reset').addEventListener('click', () => loadMeal(0));
+        document.getElementById('btn-reset').addEventListener('click', () => loadMeal(0, 'none'));
 
         /* 스와이프 제스처 */
         let txStart = 0, tyStart = 0;
@@ -441,11 +449,11 @@
             const dx = e.changedTouches[0].clientX - txStart;
             const dy = e.changedTouches[0].clientY - tyStart;
             if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
-            if (dx < 0 && dayOffset < MAX_OFFSET)  loadMeal(dayOffset + 1); // 왼쪽 → 다음날
-            if (dx > 0 && dayOffset > -MAX_OFFSET) loadMeal(dayOffset - 1); // 오른쪽 → 전날
+            if (dx < 0 && dayOffset < MAX_OFFSET)  loadMeal(dayOffset + 1, 'next');
+            if (dx > 0 && dayOffset > -MAX_OFFSET) loadMeal(dayOffset - 1, 'prev');
         }, { passive: true });
 
-        document.addEventListener('DOMContentLoaded', () => loadMeal(0));
+        document.addEventListener('DOMContentLoaded', () => loadMeal(0, 'none'));
     </script>
 </body>
 </html>
