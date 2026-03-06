@@ -8,23 +8,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --green-deep:   #1a5c2e;
-            --green-mid:    #2e8b4a;
-            --green-light:  #4db870;
             --gold:         #d4a017;
             --gold-light:   #f0c040;
-            --gold-pale:    #fdf3c0;
+            --green-light:  #4db870;
             --white:        #ffffff;
             --glass-bg:     rgba(255, 255, 255, 0.12);
             --glass-border: rgba(255, 255, 255, 0.25);
             --glass-shadow: rgba(26, 92, 46, 0.35);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             min-height: 100vh;
@@ -45,8 +38,7 @@
         }
 
         /* 배경 빛망울 */
-        body::before,
-        body::after {
+        body::before, body::after {
             content: '';
             position: fixed;
             border-radius: 50%;
@@ -56,52 +48,32 @@
             z-index: 0;
         }
         body::before {
-            width: 500px;
-            height: 500px;
+            width: 500px; height: 500px;
             background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
-            top: -150px;
-            right: -100px;
+            top: -150px; right: -100px;
             animation: floatA 12s ease-in-out infinite alternate;
         }
         body::after {
-            width: 400px;
-            height: 400px;
+            width: 400px; height: 400px;
             background: radial-gradient(circle, var(--green-light) 0%, transparent 70%);
-            bottom: -100px;
-            left: -80px;
+            bottom: -100px; left: -80px;
             animation: floatB 10s ease-in-out infinite alternate;
         }
-
         @keyframes floatA {
-            from { transform: translate(0, 0) scale(1); }
-            to   { transform: translate(-40px, 60px) scale(1.1); }
+            from { transform: translate(0,0) scale(1); }
+            to   { transform: translate(-40px,60px) scale(1.1); }
         }
         @keyframes floatB {
-            from { transform: translate(0, 0) scale(1); }
-            to   { transform: translate(50px, -40px) scale(1.15); }
+            from { transform: translate(0,0) scale(1); }
+            to   { transform: translate(50px,-40px) scale(1.15); }
         }
 
-        /* 배경 기하학 패턴 */
+        /* 배경 패턴 */
         .bg-pattern {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            opacity: 0.06;
+            position: fixed; inset: 0; z-index: 0; opacity: 0.06;
             background-image:
-                repeating-linear-gradient(
-                    60deg,
-                    transparent,
-                    transparent 40px,
-                    rgba(212,160,23,0.8) 40px,
-                    rgba(212,160,23,0.8) 41px
-                ),
-                repeating-linear-gradient(
-                    -60deg,
-                    transparent,
-                    transparent 40px,
-                    rgba(255,255,255,0.5) 40px,
-                    rgba(255,255,255,0.5) 41px
-                );
+                repeating-linear-gradient(60deg, transparent, transparent 40px, rgba(212,160,23,0.8) 40px, rgba(212,160,23,0.8) 41px),
+                repeating-linear-gradient(-60deg, transparent, transparent 40px, rgba(255,255,255,0.5) 40px, rgba(255,255,255,0.5) 41px);
         }
 
         /* 메인 카드 */
@@ -111,7 +83,7 @@
             width: 100%;
             max-width: 380px;
             margin: 20px;
-            padding: 36px 32px 28px;
+            padding: 32px 32px 28px;
             border-radius: 28px;
             background: var(--glass-bg);
             backdrop-filter: blur(24px) saturate(1.6);
@@ -123,7 +95,6 @@
                 inset 0 1px 0 rgba(255,255,255,0.3);
             animation: cardIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
         }
-
         @keyframes cardIn {
             from { opacity: 0; transform: translateY(30px) scale(0.96); }
             to   { opacity: 1; transform: translateY(0) scale(1); }
@@ -134,28 +105,24 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             padding-bottom: 22px;
             border-bottom: 1px solid rgba(255,255,255,0.15);
         }
 
+        /* 로고 - 글래스 배경 제거, 크기 확대 */
         .logo-wrap {
-            width: 64px;
-            height: 64px;
-            border-radius: 18px;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
+            width: 88px;
+            height: 88px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-            overflow: hidden;
         }
-
         .logo-wrap img {
-            width: 48px;
-            height: 48px;
+            width: 88px;
+            height: 88px;
             object-fit: contain;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.35));
         }
 
         .school-name {
@@ -172,14 +139,46 @@
             font-weight: 900;
             color: var(--white);
             letter-spacing: -0.5px;
-            line-height: 1.1;
+        }
+
+        /* 날짜 네비게이션 */
+        .date-nav {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 2px;
+        }
+
+        .nav-btn {
+            width: 30px;
+            height: 30px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(212, 160, 23, 0.2);
+            border: 1px solid rgba(212, 160, 23, 0.4);
+            color: var(--gold-light);
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, transform 0.15s;
+            line-height: 1;
+            padding: 0;
+        }
+        .nav-btn:hover {
+            background: rgba(212, 160, 23, 0.38);
+            transform: scale(1.1);
+        }
+        .nav-btn:active {
+            transform: scale(0.95);
         }
 
         .date-badge {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 5px 14px;
+            padding: 5px 16px;
             border-radius: 20px;
             background: rgba(212, 160, 23, 0.2);
             border: 1px solid rgba(212, 160, 23, 0.4);
@@ -187,15 +186,30 @@
             font-size: 0.82rem;
             font-family: 'DM Mono', monospace;
             letter-spacing: 0.5px;
+            min-width: 145px;
+            justify-content: center;
+            transition: opacity 0.2s;
+        }
+
+        /* 오늘 표시 뱃지 */
+        .today-label {
+            font-size: 0.62rem;
+            font-family: 'DM Mono', monospace;
+            letter-spacing: 1.5px;
+            color: var(--gold-light);
+            opacity: 0.6;
+            text-transform: uppercase;
+            min-height: 14px;
+            text-align: center;
         }
 
         /* 메뉴 박스 */
         .menu-box {
-            margin: 22px 0;
+            margin: 20px 0;
             padding: 22px 18px;
             border-radius: 20px;
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
             min-height: 160px;
             display: flex;
             align-items: center;
@@ -203,7 +217,9 @@
             box-shadow: inset 0 2px 12px rgba(0,0,0,0.2);
             position: relative;
             overflow: hidden;
+            transition: opacity 0.25s;
         }
+        .menu-box.fading { opacity: 0.3; }
 
         .menu-box::before {
             content: '';
@@ -224,14 +240,12 @@
             text-shadow: 0 1px 4px rgba(0,0,0,0.3);
         }
 
-        /* 로딩 */
         .loading {
             color: rgba(255,255,255,0.45) !important;
             font-size: 0.88rem !important;
             font-weight: 400 !important;
             animation: pulse 1.8s ease-in-out infinite;
         }
-
         @keyframes pulse {
             0%, 100% { opacity: 0.5; }
             50%       { opacity: 0.2; }
@@ -244,7 +258,6 @@
             padding-top: 16px;
             border-top: 1px solid rgba(255,255,255,0.1);
         }
-
         footer p {
             font-size: 0.65rem;
             font-family: 'DM Mono', monospace;
@@ -253,9 +266,8 @@
             text-transform: uppercase;
         }
 
-        /* 반응형 */
         @media (max-width: 400px) {
-            .card { padding: 28px 22px 22px; margin: 16px; }
+            .card { padding: 26px 20px 22px; margin: 16px; }
             h1 { font-size: 1.45rem; }
         }
     </style>
@@ -270,14 +282,21 @@
             </div>
             <span class="school-name">Bangsan High School</span>
             <h1>오늘의 급식</h1>
-            <div class="date-badge">
-                <span>📅</span>
-                <span id="date-display">불러오는 중...</span>
+
+            <!-- 날짜 네비게이션 -->
+            <div class="date-nav">
+                <button class="nav-btn" id="btn-prev" title="전날">&#8592;</button>
+                <div class="date-badge">
+                    <span>📅</span>
+                    <span id="date-display">불러오는 중...</span>
+                </div>
+                <button class="nav-btn" id="btn-next" title="다음날">&#8594;</button>
             </div>
+            <div class="today-label" id="today-label"></div>
         </header>
 
         <main>
-            <div class="menu-box">
+            <div class="menu-box" id="menu-box">
                 <p id="menu-text" class="loading">잠시만 기다려봐, 밥 뭐 나오나 보고 올게...</p>
             </div>
         </main>
@@ -291,67 +310,25 @@
         const CONFIG = {
             API_KEY:     'f7c1da6c25924c5cbe67899392529afb',
             OFFICE_CODE: 'B10',
-            SCHOOL_CODE: '7010590'  // 방산고등학교
+            SCHOOL_CODE: '7010590'
         };
+        const MEAL_CODE = '2'; // 중식만
 
-        // 방산고는 중식만 운영
-        const MEAL_CODE = '2';
+        // 현재 보고 있는 날짜 (offset: 오늘 기준 ±n일)
+        let dayOffset = 0;
 
-        async function searchMeal() {
-            let targetDate = new Date();
+        // 오늘 기준 날짜 계산
+        function getBaseDate() {
+            const now = new Date();
+            // 오후 2시 이후면 기본을 내일로
+            if (now.getHours() >= 14) now.setDate(now.getDate() + 1);
+            return now;
+        }
 
-            // 오후 2시 이후면 다음날 급식 표시
-            if (targetDate.getHours() >= 14) {
-                targetDate.setDate(targetDate.getDate() + 1);
-            }
-
-            const display = document.getElementById('menu-text');
-            display.className = 'loading';
-            display.innerText = '불러오는 중...';
-
-            let menuFound = false;
-
-            // 최대 7일까지 탐색 (주말·공휴일 건너뜀)
-            for (let i = 0; i < 7; i++) {
-                const yyyymmdd = formatDate(targetDate);
-
-                try {
-                    const url =
-                        `https://open.neis.go.kr/hub/mealServiceDietInfo` +
-                        `?KEY=${CONFIG.API_KEY}` +
-                        `&Type=json` +
-                        `&ATPT_OFCDC_SC_CODE=${CONFIG.OFFICE_CODE}` +
-                        `&SD_SCHUL_CODE=${CONFIG.SCHOOL_CODE}` +
-                        `&MLSV_YMD=${yyyymmdd}` +
-                        `&MMEAL_SC_CODE=${MEAL_CODE}`;
-
-                    const res = await fetch(url);
-                    if (!res.ok) throw new Error('Network error');
-
-                    const data = await res.json();
-
-                    if (data.mealServiceDietInfo) {
-                        const rawMenu = data.mealServiceDietInfo[1].row[0].DDISH_NM;
-                        const cleanMenu = rawMenu
-                            .replace(/\([^)]*\)/g, '')
-                            .replace(/<br\/>/g, '\n')
-                            .trim();
-
-                        renderMenu(yyyymmdd, cleanMenu);
-                        menuFound = true;
-                        break;
-                    }
-                } catch (e) {
-                    console.error('급식 데이터 오류:', e);
-                }
-
-                targetDate.setDate(targetDate.getDate() + 1);
-            }
-
-            if (!menuFound) {
-                display.className = '';
-                display.innerText = '당분간 급식 정보가 없어요.\n(방학이거나 주말이에요 🌿)';
-            }
+        function getTargetDate(offset) {
+            const base = getBaseDate();
+            base.setDate(base.getDate() + offset);
+            return base;
         }
 
         function formatDate(date) {
@@ -361,19 +338,97 @@
             return `${y}${m}${d}`;
         }
 
-        function renderMenu(dateStr, menu) {
-            const y = dateStr.slice(0, 4);
-            const m = dateStr.slice(4, 6);
-            const d = dateStr.slice(6, 8);
-
-            document.getElementById('date-display').innerText = `${y}년 ${m}월 ${d}일`;
-
-            const display = document.getElementById('menu-text');
-            display.className = '';
-            display.innerText = menu;
+        function isSameDay(d1, d2) {
+            return d1.getFullYear() === d2.getFullYear()
+                && d1.getMonth()    === d2.getMonth()
+                && d1.getDate()     === d2.getDate();
         }
 
-        document.addEventListener('DOMContentLoaded', searchMeal);
+        async function fetchMeal(date) {
+            const yyyymmdd = formatDate(date);
+            const url =
+                `https://open.neis.go.kr/hub/mealServiceDietInfo` +
+                `?KEY=${CONFIG.API_KEY}` +
+                `&Type=json` +
+                `&ATPT_OFCDC_SC_CODE=${CONFIG.OFFICE_CODE}` +
+                `&SD_SCHUL_CODE=${CONFIG.SCHOOL_CODE}` +
+                `&MLSV_YMD=${yyyymmdd}` +
+                `&MMEAL_SC_CODE=${MEAL_CODE}`;
+
+            const res = await fetch(url);
+            if (!res.ok) throw new Error('Network error');
+            const data = await res.json();
+
+            if (data.mealServiceDietInfo) {
+                const rawMenu = data.mealServiceDietInfo[1].row[0].DDISH_NM;
+                return rawMenu
+                    .replace(/\([^)]*\)/g, '')
+                    .replace(/<br\/>/g, '\n')
+                    .trim();
+            }
+            return null;
+        }
+
+        async function loadMeal(offset) {
+            dayOffset = offset;
+
+            const display   = document.getElementById('menu-text');
+            const menuBox   = document.getElementById('menu-box');
+            const dateEl    = document.getElementById('date-display');
+            const labelEl   = document.getElementById('today-label');
+
+            // 페이드 아웃
+            menuBox.classList.add('fading');
+            display.className = 'loading';
+            display.innerText = '불러오는 중...';
+
+            const targetDate = getTargetDate(offset);
+            const today      = new Date();
+
+            // 오늘/내일 라벨
+            if (isSameDay(targetDate, today)) {
+                labelEl.innerText = '— TODAY —';
+            } else {
+                const tomorrow = new Date(today);
+                tomorrow.setDate(today.getDate() + 1);
+                if (isSameDay(targetDate, tomorrow)) {
+                    labelEl.innerText = '— TOMORROW —';
+                } else {
+                    labelEl.innerText = '';
+                }
+            }
+
+            let menu = null;
+            let searchDate = new Date(targetDate);
+
+            // 해당 날짜에 급식 없으면 최대 ±1일 안에서만 표시 (화살표 이동 시엔 그 날만)
+            try {
+                menu = await fetchMeal(searchDate);
+            } catch (e) {
+                console.error(e);
+            }
+
+            const yyyymmdd = formatDate(searchDate);
+            const y = yyyymmdd.slice(0, 4);
+            const m = yyyymmdd.slice(4, 6);
+            const d = yyyymmdd.slice(6, 8);
+            dateEl.innerText = `${y}년 ${m}월 ${d}일`;
+
+            menuBox.classList.remove('fading');
+
+            if (menu) {
+                display.className = '';
+                display.innerText = menu;
+            } else {
+                display.className = '';
+                display.innerText = '이 날은 급식이 없어요 🌿\n(주말이거나 방학이에요)';
+            }
+        }
+
+        document.getElementById('btn-prev').addEventListener('click', () => loadMeal(dayOffset - 1));
+        document.getElementById('btn-next').addEventListener('click', () => loadMeal(dayOffset + 1));
+
+        document.addEventListener('DOMContentLoaded', () => loadMeal(0));
     </script>
 </body>
 </html>
