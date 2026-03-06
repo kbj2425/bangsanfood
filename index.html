@@ -200,6 +200,24 @@
             transition: opacity 0.2s;
         }
 
+        /* 요일 태그 */
+        .day-tag {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            opacity: 0.9;
+            margin-left: 2px;
+        }
+
+        /* 오늘 라벨 + 오늘 버튼 행 */
+        .today-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 20px;
+        }
+
         /* 오늘 표시 뱃지 */
         .today-label {
             font-size: 0.62rem;
@@ -208,9 +226,28 @@
             color: var(--gold-light);
             opacity: 0.6;
             text-transform: uppercase;
-            min-height: 14px;
-            text-align: center;
         }
+
+        /* 오늘 버튼 */
+        .today-btn {
+            display: none;
+            padding: 2px 10px;
+            border: 1px solid rgba(212, 160, 23, 0.5);
+            border-radius: 12px;
+            background: rgba(212, 160, 23, 0.15);
+            color: var(--gold-light);
+            font-size: 0.65rem;
+            font-family: 'DM Mono', monospace;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s;
+        }
+        .today-btn.visible { display: inline-block; }
+        .today-btn:hover {
+            background: rgba(212, 160, 23, 0.32);
+            transform: scale(1.05);
+        }
+        .today-btn:active { transform: scale(0.96); }
 
         /* 메뉴 박스 */
         .menu-box {
@@ -298,10 +335,14 @@
                 <div class="date-badge">
                     <span>📅</span>
                     <span id="date-display">불러오는 중...</span>
+                    <span id="day-display" class="day-tag"></span>
                 </div>
                 <button class="nav-btn" id="btn-next" title="다음날">&#8594;</button>
             </div>
-            <div class="today-label" id="today-label"></div>
+            <div class="today-row">
+                <div class="today-label" id="today-label"></div>
+                <button class="today-btn" id="btn-today">오늘</button>
+            </div>
         </header>
 
         <main>
@@ -429,6 +470,14 @@
             const yyyymmdd = formatDate(targetDate);
             dateEl.innerText = `${yyyymmdd.slice(0,4)}년 ${yyyymmdd.slice(4,6)}월 ${yyyymmdd.slice(6,8)}일`;
 
+            // 요일 표시
+            const DAYS = ['일', '월', '화', '수', '목', '금', '토'];
+            document.getElementById('day-display').innerText = `(${DAYS[targetDate.getDay()]})`;
+
+            // 오늘 버튼 — offset이 0이 아닐 때만 보이기
+            const todayBtn = document.getElementById('btn-today');
+            todayBtn.className = offset !== 0 ? 'today-btn visible' : 'today-btn';
+
             let menu = null;
             try {
                 menu = await fetchMeal(targetDate);
@@ -453,6 +502,7 @@
         document.getElementById('btn-next').addEventListener('click', () => {
             if (dayOffset < MAX_OFFSET) loadMeal(dayOffset + 1);
         });
+        document.getElementById('btn-today').addEventListener('click', () => loadMeal(0));
 
         document.addEventListener('DOMContentLoaded', () => loadMeal(0));
     </script>
