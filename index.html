@@ -173,6 +173,15 @@
         .nav-btn:active {
             transform: scale(0.95);
         }
+        .nav-btn:disabled {
+            opacity: 0.25;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        .nav-btn:disabled:hover {
+            background: rgba(212, 160, 23, 0.2);
+            transform: none !important;
+        }
 
         .date-badge {
             display: inline-flex;
@@ -314,20 +323,34 @@
         };
         const MEAL_CODE = '2'; // 중식만
 
-        // 현재 보고 있는 날짜 (offset: 오늘 기준 ±n일)
+        // 현재 보고 있는 날짜 스텝 (평일 기준 ±n칸)
         let dayOffset = 0;
+        const MAX_OFFSET = 5; // 앞뒤 최대 5일
 
-        // 오늘 기준 날짜 계산
+        // 평일(월~금) 판별
+        function isWeekday(date) {
+            const dow = date.getDay();
+            return dow !== 0 && dow !== 6;
+        }
+
+        // 오늘 기준 날짜 계산 (오후 2시 이후면 다음 평일로)
         function getBaseDate() {
             const now = new Date();
-            // 오후 2시 이후면 기본을 내일로
             if (now.getHours() >= 14) now.setDate(now.getDate() + 1);
+            // 주말이면 다음 월요일로
+            while (!isWeekday(now)) now.setDate(now.getDate() + 1);
             return now;
         }
 
+        // offset(평일 기준 ±n)만큼 이동한 날짜 반환
         function getTargetDate(offset) {
             const base = getBaseDate();
-            base.setDate(base.getDate() + offset);
+            const step = offset >= 0 ? 1 : -1;
+            let count = Math.abs(offset);
+            while (count > 0) {
+                base.setDate(base.getDate() + step);
+                if (isWeekday(base)) count--;
+            }
             return base;
         }
 
@@ -342,6 +365,12 @@
             return d1.getFullYear() === d2.getFullYear()
                 && d1.getMonth()    === d2.getMonth()
                 && d1.getDate()     === d2.getDate();
+        }
+
+        // 버튼 활성/비활성 업데이트
+        function updateButtons() {
+            document.getElementById('btn-prev').disabled = dayOffset <= -MAX_OFFSET;
+            document.getElementById('btn-next').disabled = dayOffset >= MAX_OFFSET;
         }
 
         async function fetchMeal(date) {
@@ -371,13 +400,13 @@
 
         async function loadMeal(offset) {
             dayOffset = offset;
+            updateButtons();
 
-            const display   = document.getElementById('menu-text');
-            const menuBox   = document.getElementById('menu-box');
-            const dateEl    = document.getElementById('date-display');
-            const labelEl   = document.getElementById('today-label');
+            const display = document.getElementById('menu-text');
+            const menuBox = document.getElementById('menu-box');
+            const dateEl  = document.getElementById('date-display');
+            const labelEl = document.getElementById('today-label');
 
-            // 페이드 아웃
             menuBox.classList.add('fading');
             display.className = 'loading';
             display.innerText = '불러오는 중...';
@@ -391,28 +420,18 @@
             } else {
                 const tomorrow = new Date(today);
                 tomorrow.setDate(today.getDate() + 1);
-                if (isSameDay(targetDate, tomorrow)) {
-                    labelEl.innerText = '— TOMORROW —';
-                } else {
-                    labelEl.innerText = '';
-                }
+                labelEl.innerText = isSameDay(targetDate, tomorrow) ? '— TOMORROW —' : '';
             }
 
-            let menu = null;
-            let searchDate = new Date(targetDate);
+            const yyyymmdd = formatDate(targetDate);
+            dateEl.innerText = `${yyyymmdd.slice(0,4)}년 ${yyyymmdd.slice(4,6)}월 ${yyyymmdd.slice(6,8)}일`;
 
-            // 해당 날짜에 급식 없으면 최대 ±1일 안에서만 표시 (화살표 이동 시엔 그 날만)
+            let menu = null;
             try {
-                menu = await fetchMeal(searchDate);
+                menu = await fetchMeal(targetDate);
             } catch (e) {
                 console.error(e);
             }
-
-            const yyyymmdd = formatDate(searchDate);
-            const y = yyyymmdd.slice(0, 4);
-            const m = yyyymmdd.slice(4, 6);
-            const d = yyyymmdd.slice(6, 8);
-            dateEl.innerText = `${y}년 ${m}월 ${d}일`;
 
             menuBox.classList.remove('fading');
 
@@ -421,12 +440,16 @@
                 display.innerText = menu;
             } else {
                 display.className = '';
-                display.innerText = '이 날은 급식이 없어요 🌿\n(주말이거나 방학이에요)';
+                display.innerText = '이 날은 급식 정보가 없어요 🌿\n(방학 · 공휴일 · 휴업일)';
             }
         }
 
-        document.getElementById('btn-prev').addEventListener('click', () => loadMeal(dayOffset - 1));
-        document.getElementById('btn-next').addEventListener('click', () => loadMeal(dayOffset + 1));
+        document.getElementById('btn-prev').addEventListener('click', () => {
+            if (dayOffset > -MAX_OFFSET) loadMeal(dayOffset - 1);
+        });
+        document.getElementById('btn-next').addEventListener('click', () => {
+            if (dayOffset < MAX_OFFSET) loadMeal(dayOffset + 1);
+        });
 
         document.addEventListener('DOMContentLoaded', () => loadMeal(0));
     </script>
