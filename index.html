@@ -391,8 +391,11 @@
             if (data.mealServiceDietInfo) {
                 const rawMenu = data.mealServiceDietInfo[1].row[0].DDISH_NM;
                 return rawMenu
-                    .replace(/\([^)]*\)/g, '')
+                    .replace(/\([^)]*\)/g, '')   // 괄호 안 알레르기 번호 제거
+                    .replace(/[\d.]+(?=\s*(<br\/>|$))/g, '') // 줄 끝 숫자 제거
+                    .replace(/\d+(\.\d+)*/g, '')  // 나머지 붙어있는 숫자 제거
                     .replace(/<br\/>/g, '\n')
+                    .replace(/\s+\n/g, '\n')      // 줄 끝 공백 정리
                     .trim();
             }
             return null;
