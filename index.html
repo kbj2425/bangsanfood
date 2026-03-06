@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>방산고 급식 알리미</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-deep:   #1a5c2e;
+            --green-mid:    #2e8b4a;
+            --green-light:  #4db870;
+            --gold:         #d4a017;
+            --gold-light:   #f0c040;
+            --gold-pale:    #fdf3c0;
+            --white:        #ffffff;
+            --glass-bg:     rgba(255, 255, 255, 0.12);
+            --glass-border: rgba(255, 255, 255, 0.25);
+            --glass-shadow: rgba(26, 92, 46, 0.35);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Noto Serif KR', serif;
+            background: linear-gradient(
+                135deg,
+                #0f3d1f 0%,
+                #1a5c2e 30%,
+                #2e6b20 55%,
+                #1e4d10 75%,
+                #0a2e12 100%
+            );
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 배경 빛망울 */
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 0;
+        }
+        body::before {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+            top: -150px;
+            right: -100px;
+            animation: floatA 12s ease-in-out infinite alternate;
+        }
+        body::after {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--green-light) 0%, transparent 70%);
+            bottom: -100px;
+            left: -80px;
+            animation: floatB 10s ease-in-out infinite alternate;
+        }
+
+        @keyframes floatA {
+            from { transform: translate(0, 0) scale(1); }
+            to   { transform: translate(-40px, 60px) scale(1.1); }
+        }
+        @keyframes floatB {
+            from { transform: translate(0, 0) scale(1); }
+            to   { transform: translate(50px, -40px) scale(1.15); }
+        }
+
+        /* 배경 기하학 패턴 */
+        .bg-pattern {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            opacity: 0.06;
+            background-image:
+                repeating-linear-gradient(
+                    60deg,
+                    transparent,
+                    transparent 40px,
+                    rgba(212,160,23,0.8) 40px,
+                    rgba(212,160,23,0.8) 41px
+                ),
+                repeating-linear-gradient(
+                    -60deg,
+                    transparent,
+                    transparent 40px,
+                    rgba(255,255,255,0.5) 40px,
+                    rgba(255,255,255,0.5) 41px
+                );
+        }
+
+        /* 메인 카드 */
+        .card {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 380px;
+            margin: 20px;
+            padding: 36px 32px 28px;
+            border-radius: 28px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px) saturate(1.6);
+            -webkit-backdrop-filter: blur(24px) saturate(1.6);
+            border: 1px solid var(--glass-border);
+            box-shadow:
+                0 8px 48px var(--glass-shadow),
+                0 2px 8px rgba(0,0,0,0.2),
+                inset 0 1px 0 rgba(255,255,255,0.3);
+            animation: cardIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        @keyframes cardIn {
+            from { opacity: 0; transform: translateY(30px) scale(0.96); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* 헤더 */
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding-bottom: 22px;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .logo-wrap {
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .logo-wrap img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+        }
+
+        .school-name {
+            font-size: 0.72rem;
+            font-family: 'DM Mono', monospace;
+            letter-spacing: 3px;
+            color: var(--gold-light);
+            opacity: 0.85;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: 1.65rem;
+            font-weight: 900;
+            color: var(--white);
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+        }
+
+        .date-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 14px;
+            border-radius: 20px;
+            background: rgba(212, 160, 23, 0.2);
+            border: 1px solid rgba(212, 160, 23, 0.4);
+            color: var(--gold-light);
+            font-size: 0.82rem;
+            font-family: 'DM Mono', monospace;
+            letter-spacing: 0.5px;
+        }
+
+        /* 메뉴 박스 */
+        .menu-box {
+            margin: 22px 0;
+            padding: 22px 18px;
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            min-height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 2px 12px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(240,192,64,0.6), transparent);
+        }
+
+        #menu-text {
+            color: var(--white);
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 2.1;
+            white-space: pre-wrap;
+            text-align: center;
+            letter-spacing: 0.2px;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+        }
+
+        /* 로딩 */
+        .loading {
+            color: rgba(255,255,255,0.45) !important;
+            font-size: 0.88rem !important;
+            font-weight: 400 !important;
+            animation: pulse 1.8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50%       { opacity: 0.2; }
+        }
+
+        /* 푸터 */
+        footer {
+            display: flex;
+            justify-content: center;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        footer p {
+            font-size: 0.65rem;
+            font-family: 'DM Mono', monospace;
+            letter-spacing: 3px;
+            color: rgba(255,255,255,0.3);
+            text-transform: uppercase;
+        }
+
+        /* 반응형 */
+        @media (max-width: 400px) {
+            .card { padding: 28px 22px 22px; margin: 16px; }
+            h1 { font-size: 1.45rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+
+    <div class="card">
+        <header>
+            <div class="logo-wrap">
+                <img src="logo.svg" alt="방산고 로고">
+            </div>
+            <span class="school-name">Bangsan High School</span>
+            <h1>오늘의 급식</h1>
+            <div class="date-badge">
+                <span>📅</span>
+                <span id="date-display">불러오는 중...</span>
+            </div>
+        </header>
+
+        <main>
+            <div class="menu-box">
+                <p id="menu-text" class="loading">잠시만 기다려봐, 밥 뭐 나오나 보고 올게...</p>
+            </div>
+        </main>
+
+        <footer>
+            <p>BANGSAN HIGH SCHOOL · MEAL INFO</p>
+        </footer>
+    </div>
+
+    <script>
+        const CONFIG = {
+            API_KEY:     'f7c1da6c25924c5cbe67899392529afb',
+            OFFICE_CODE: 'B10',
+            SCHOOL_CODE: '7010590'  // 방산고등학교
+        };
+
+        // 방산고는 중식만 운영
+        const MEAL_CODE = '2';
+
+        async function searchMeal() {
+            let targetDate = new Date();
+
+            // 오후 2시 이후면 다음날 급식 표시
+            if (targetDate.getHours() >= 14) {
+                targetDate.setDate(targetDate.getDate() + 1);
+            }
+
+            const display = document.getElementById('menu-text');
+            display.className = 'loading';
+            display.innerText = '불러오는 중...';
+
+            let menuFound = false;
+
+            // 최대 7일까지 탐색 (주말·공휴일 건너뜀)
+            for (let i = 0; i < 7; i++) {
+                const yyyymmdd = formatDate(targetDate);
+
+                try {
+                    const url =
+                        `https://open.neis.go.kr/hub/mealServiceDietInfo` +
+                        `?KEY=${CONFIG.API_KEY}` +
+                        `&Type=json` +
+                        `&ATPT_OFCDC_SC_CODE=${CONFIG.OFFICE_CODE}` +
+                        `&SD_SCHUL_CODE=${CONFIG.SCHOOL_CODE}` +
+                        `&MLSV_YMD=${yyyymmdd}` +
+                        `&MMEAL_SC_CODE=${MEAL_CODE}`;
+
+                    const res = await fetch(url);
+                    if (!res.ok) throw new Error('Network error');
+
+                    const data = await res.json();
+
+                    if (data.mealServiceDietInfo) {
+                        const rawMenu = data.mealServiceDietInfo[1].row[0].DDISH_NM;
+                        const cleanMenu = rawMenu
+                            .replace(/\([^)]*\)/g, '')
+                            .replace(/<br\/>/g, '\n')
+                            .trim();
+
+                        renderMenu(yyyymmdd, cleanMenu);
+                        menuFound = true;
+                        break;
+                    }
+                } catch (e) {
+                    console.error('급식 데이터 오류:', e);
+                }
+
+                targetDate.setDate(targetDate.getDate() + 1);
+            }
+
+            if (!menuFound) {
+                display.className = '';
+                display.innerText = '당분간 급식 정보가 없어요.\n(방학이거나 주말이에요 🌿)';
+            }
+        }
+
+        function formatDate(date) {
+            const y = date.getFullYear();
+            const m = String(date.getMonth() + 1).padStart(2, '0');
+            const d = String(date.getDate()).padStart(2, '0');
+            return `${y}${m}${d}`;
+        }
+
+        function renderMenu(dateStr, menu) {
+            const y = dateStr.slice(0, 4);
+            const m = dateStr.slice(4, 6);
+            const d = dateStr.slice(6, 8);
+
+            document.getElementById('date-display').innerText = `${y}년 ${m}월 ${d}일`;
+
+            const display = document.getElementById('menu-text');
+            display.className = '';
+            display.innerText = menu;
+        }
+
+        document.addEventListener('DOMContentLoaded', searchMeal);
+    </script>
+</body>
+</html>
