@@ -25,19 +25,11 @@
             justify-content: center;
             align-items: center;
             font-family: 'Noto Serif KR', serif;
-            background: linear-gradient(
-                135deg,
-                #0f3d1f 0%,
-                #1a5c2e 30%,
-                #2e6b20 55%,
-                #1e4d10 75%,
-                #0a2e12 100%
-            );
+            background: linear-gradient(135deg, #0f3d1f 0%, #1a5c2e 30%, #2e6b20 55%, #1e4d10 75%, #0a2e12 100%);
             overflow: hidden;
             position: relative;
         }
 
-        /* 배경 빛망울 */
         body::before, body::after {
             content: '';
             position: fixed;
@@ -68,7 +60,6 @@
             to   { transform: translate(50px,-40px) scale(1.15); }
         }
 
-        /* 배경 패턴 */
         .bg-pattern {
             position: fixed; inset: 0; z-index: 0; opacity: 0.06;
             background-image:
@@ -76,12 +67,12 @@
                 repeating-linear-gradient(-60deg, transparent, transparent 40px, rgba(255,255,255,0.5) 40px, rgba(255,255,255,0.5) 41px);
         }
 
-        /* 메인 카드 */
+        /* 카드 */
         .card {
             position: relative;
             z-index: 10;
             width: 100%;
-            max-width: 380px;
+            max-width: 400px;
             margin: 20px;
             padding: 32px 32px 28px;
             border-radius: 28px;
@@ -89,10 +80,7 @@
             backdrop-filter: blur(24px) saturate(1.6);
             -webkit-backdrop-filter: blur(24px) saturate(1.6);
             border: 1px solid var(--glass-border);
-            box-shadow:
-                0 8px 48px var(--glass-shadow),
-                0 2px 8px rgba(0,0,0,0.2),
-                inset 0 1px 0 rgba(255,255,255,0.3);
+            box-shadow: 0 8px 48px var(--glass-shadow), 0 2px 8px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.3);
             animation: cardIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
         }
         @keyframes cardIn {
@@ -106,24 +94,12 @@
             flex-direction: column;
             align-items: center;
             gap: 10px;
-            padding-bottom: 22px;
+            padding-bottom: 18px;
             border-bottom: 1px solid rgba(255,255,255,0.15);
         }
 
-        /* 로고 - 글래스 배경 제거, 크기 확대 */
-        .logo-wrap {
-            width: 88px;
-            height: 88px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .logo-wrap img {
-            width: 88px;
-            height: 88px;
-            object-fit: contain;
-            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.35));
-        }
+        .logo-wrap { width: 88px; height: 88px; display: flex; align-items: center; justify-content: center; }
+        .logo-wrap img { width: 88px; height: 88px; object-fit: contain; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.35)); }
 
         .school-name {
             font-size: 0.72rem;
@@ -134,107 +110,76 @@
             text-transform: uppercase;
         }
 
-        h1 {
-            font-size: 1.65rem;
-            font-weight: 900;
-            color: var(--white);
-            letter-spacing: -0.5px;
+        h1 { font-size: 1.65rem; font-weight: 900; color: var(--white); letter-spacing: -0.5px; }
+
+        /* 탭 전환 버튼 */
+        .view-tabs {
+            display: flex;
+            gap: 6px;
+            background: rgba(0,0,0,0.2);
+            padding: 4px;
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .tab-btn {
+            padding: 4px 14px;
+            border-radius: 10px;
+            border: none;
+            background: transparent;
+            color: rgba(255,255,255,0.45);
+            font-size: 0.75rem;
+            font-family: 'DM Mono', monospace;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .tab-btn.active {
+            background: rgba(212,160,23,0.3);
+            color: var(--gold-light);
+            border: 1px solid rgba(212,160,23,0.4);
         }
 
         /* 날짜 네비게이션 */
-        .date-nav {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 2px;
-        }
+        .date-nav { display: flex; align-items: center; gap: 10px; margin-top: 2px; }
 
         .nav-btn {
-            width: 30px;
-            height: 30px;
-            border: none;
+            width: 30px; height: 30px;
             border-radius: 50%;
-            background: rgba(212, 160, 23, 0.2);
-            border: 1px solid rgba(212, 160, 23, 0.4);
+            background: rgba(212,160,23,0.2);
+            border: 1px solid rgba(212,160,23,0.4);
             color: var(--gold-light);
             font-size: 1rem;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             transition: background 0.2s, transform 0.15s;
-            line-height: 1;
             padding: 0;
         }
-        .nav-btn:hover {
-            background: rgba(212, 160, 23, 0.38);
-            transform: scale(1.1);
-        }
-        .nav-btn:active {
-            transform: scale(0.95);
-        }
-        .nav-btn:disabled {
-            opacity: 0.25;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-        .nav-btn:disabled:hover {
-            background: rgba(212, 160, 23, 0.2);
-            transform: none !important;
-        }
+        .nav-btn:hover { background: rgba(212,160,23,0.38); transform: scale(1.1); }
+        .nav-btn:active { transform: scale(0.95); }
+        .nav-btn:disabled { opacity: 0.25; cursor: not-allowed; transform: none !important; }
+        .nav-btn:disabled:hover { background: rgba(212,160,23,0.2); transform: none !important; }
 
         .date-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 5px 16px;
-            border-radius: 20px;
-            background: rgba(212, 160, 23, 0.2);
-            border: 1px solid rgba(212, 160, 23, 0.4);
-            color: var(--gold-light);
-            font-size: 0.82rem;
-            font-family: 'DM Mono', monospace;
-            letter-spacing: 0.5px;
-            min-width: 145px;
-            justify-content: center;
-            transition: opacity 0.2s;
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 5px 16px; border-radius: 20px;
+            background: rgba(212,160,23,0.2); border: 1px solid rgba(212,160,23,0.4);
+            color: var(--gold-light); font-size: 0.82rem;
+            font-family: 'DM Mono', monospace; letter-spacing: 0.5px;
+            min-width: 155px; justify-content: center;
         }
+        .day-tag { font-size: 0.78rem; font-weight: 700; opacity: 0.9; margin-left: 2px; }
 
-        /* 요일 태그 */
-        .day-tag {
-            font-size: 0.78rem;
-            font-weight: 700;
-            color: var(--gold-light);
-            opacity: 0.9;
-            margin-left: 2px;
+        /* 초기화 버튼 행 */
+        .reset-row {
+            display: flex; align-items: center; justify-content: center;
+            gap: 10px; min-height: 20px;
         }
-
-        /* 오늘 라벨 + 오늘 버튼 행 */
-        .today-row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            min-height: 20px;
-        }
-
-        /* 오늘 표시 뱃지 */
-        .today-label {
-            font-size: 0.62rem;
-            font-family: 'DM Mono', monospace;
-            letter-spacing: 1.5px;
-            color: var(--gold-light);
-            opacity: 0.6;
-            text-transform: uppercase;
-        }
-
-        /* 오늘 버튼 */
-        .today-btn {
+        .reset-btn {
             display: none;
             padding: 2px 10px;
-            border: 1px solid rgba(212, 160, 23, 0.5);
+            border: 1px solid rgba(212,160,23,0.5);
             border-radius: 12px;
-            background: rgba(212, 160, 23, 0.15);
+            background: rgba(212,160,23,0.15);
             color: var(--gold-light);
             font-size: 0.65rem;
             font-family: 'DM Mono', monospace;
@@ -242,54 +187,141 @@
             cursor: pointer;
             transition: background 0.2s, transform 0.15s;
         }
-        .today-btn.visible { display: inline-block; }
-        .today-btn:hover {
-            background: rgba(212, 160, 23, 0.32);
-            transform: scale(1.05);
-        }
-        .today-btn:active { transform: scale(0.96); }
+        .reset-btn.visible { display: inline-block; }
+        .reset-btn:hover { background: rgba(212,160,23,0.32); transform: scale(1.05); }
+        .reset-btn:active { transform: scale(0.96); }
 
-        /* 메뉴 박스 */
+        /* ── 일별 뷰 ── */
+        #view-single { }
+
         .menu-box {
-            margin: 20px 0;
+            margin: 18px 0;
             padding: 22px 18px;
             border-radius: 20px;
             background: rgba(0,0,0,0.2);
             border: 1px solid rgba(255,255,255,0.1);
             min-height: 160px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             box-shadow: inset 0 2px 12px rgba(0,0,0,0.2);
-            position: relative;
-            overflow: hidden;
+            position: relative; overflow: hidden;
             transition: opacity 0.25s;
         }
         .menu-box.fading { opacity: 0.3; }
-
         .menu-box::before {
             content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 1px;
+            position: absolute; top: 0; left: 0; right: 0; height: 1px;
             background: linear-gradient(90deg, transparent, rgba(240,192,64,0.6), transparent);
         }
-
         #menu-text {
             color: var(--white);
-            font-size: 1rem;
-            font-weight: 700;
-            line-height: 2.1;
-            white-space: pre-wrap;
-            text-align: center;
-            letter-spacing: 0.2px;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+            font-size: 1rem; font-weight: 700; line-height: 2.1;
+            white-space: pre-wrap; text-align: center;
+            letter-spacing: 0.2px; text-shadow: 0 1px 4px rgba(0,0,0,0.3);
         }
 
+        /* ── 주간 뷰 ── */
+        #view-week { display: none; margin-top: 16px; }
+        #view-week.active { display: block; }
+
+        .week-grid { display: flex; flex-direction: column; gap: 8px; }
+
+        .week-row {
+            display: flex;
+            align-items: stretch;
+            gap: 10px;
+            padding: 12px 14px;
+            border-radius: 16px;
+            background: rgba(0,0,0,0.18);
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: background 0.2s;
+        }
+        .week-row.today-row-week {
+            background: rgba(212,160,23,0.15);
+            border-color: rgba(212,160,23,0.35);
+        }
+        .week-row.no-meal { opacity: 0.45; }
+
+        .week-day-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 30px;
+        }
+        .week-day-name {
+            font-size: 0.72rem;
+            font-family: 'DM Mono', monospace;
+            color: var(--gold-light);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .week-day-num {
+            font-size: 1rem;
+            font-weight: 900;
+            color: var(--white);
+            line-height: 1.2;
+        }
+
+        .week-divider {
+            width: 1px;
+            background: rgba(255,255,255,0.12);
+            border-radius: 1px;
+        }
+
+        .week-menu {
+            flex: 1;
+            color: rgba(255,255,255,0.88);
+            font-size: 0.8rem;
+            font-weight: 600;
+            line-height: 1.75;
+            white-space: pre-wrap;
+            display: flex;
+            align-items: center;
+        }
+        .week-menu.loading-cell {
+            color: rgba(255,255,255,0.3);
+            font-size: 0.75rem;
+            font-weight: 400;
+            animation: pulse 1.8s ease-in-out infinite;
+        }
+        .week-menu.empty-cell {
+            color: rgba(255,255,255,0.3);
+            font-size: 0.75rem;
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        /* 주간 날짜 헤더 */
+        .week-header {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .week-range {
+            font-size: 0.7rem;
+            font-family: 'DM Mono', monospace;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 1px;
+        }
+        .week-nav { display: flex; gap: 6px; }
+        .week-nav-btn {
+            width: 24px; height: 24px;
+            border-radius: 50%;
+            background: rgba(212,160,23,0.15);
+            border: 1px solid rgba(212,160,23,0.3);
+            color: var(--gold-light);
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s, transform 0.15s;
+            padding: 0;
+        }
+        .week-nav-btn:hover { background: rgba(212,160,23,0.3); transform: scale(1.08); }
+        .week-nav-btn:active { transform: scale(0.94); }
+
+        /* 로딩 */
         .loading {
             color: rgba(255,255,255,0.45) !important;
-            font-size: 0.88rem !important;
-            font-weight: 400 !important;
+            font-size: 0.88rem !important; font-weight: 400 !important;
             animation: pulse 1.8s ease-in-out infinite;
         }
         @keyframes pulse {
@@ -298,22 +330,11 @@
         }
 
         /* 푸터 */
-        footer {
-            display: flex;
-            justify-content: center;
-            padding-top: 16px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-        footer p {
-            font-size: 0.65rem;
-            font-family: 'DM Mono', monospace;
-            letter-spacing: 3px;
-            color: rgba(255,255,255,0.3);
-            text-transform: uppercase;
-        }
+        footer { display: flex; justify-content: center; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 4px; }
+        footer p { font-size: 0.65rem; font-family: 'DM Mono', monospace; letter-spacing: 3px; color: rgba(255,255,255,0.3); text-transform: uppercase; }
 
         @media (max-width: 400px) {
-            .card { padding: 26px 20px 22px; margin: 16px; }
+            .card { padding: 26px 18px 22px; margin: 12px; }
             h1 { font-size: 1.45rem; }
         }
     </style>
@@ -329,25 +350,43 @@
             <span class="school-name">Bangsan High School</span>
             <h1>오늘의 급식</h1>
 
-            <!-- 날짜 네비게이션 -->
-            <div class="date-nav">
-                <button class="nav-btn" id="btn-prev" title="전날">&#8592;</button>
-                <div class="date-badge">
-                    <span>📅</span>
-                    <span id="date-display">불러오는 중...</span>
-                    <span id="day-display" class="day-tag"></span>
-                </div>
-                <button class="nav-btn" id="btn-next" title="다음날">&#8594;</button>
-            </div>
-            <div class="today-row">
-                <div class="today-label" id="today-label"></div>
-                <button class="today-btn" id="btn-today">오늘</button>
+            <!-- 일별 / 주간 탭 -->
+            <div class="view-tabs">
+                <button class="tab-btn active" id="tab-single">일별</button>
+                <button class="tab-btn" id="tab-week">주간</button>
             </div>
         </header>
 
         <main>
-            <div class="menu-box" id="menu-box">
-                <p id="menu-text" class="loading">잠시만 기다려봐, 밥 뭐 나오나 보고 올게...</p>
+            <!-- ── 일별 뷰 ── -->
+            <div id="view-single">
+                <div class="date-nav" style="margin-top:16px;">
+                    <button class="nav-btn" id="btn-prev">&#8592;</button>
+                    <div class="date-badge">
+                        <span>📅</span>
+                        <span id="date-display">불러오는 중...</span>
+                        <span id="day-display" class="day-tag"></span>
+                    </div>
+                    <button class="nav-btn" id="btn-next">&#8594;</button>
+                </div>
+                <div class="reset-row">
+                    <button class="reset-btn" id="btn-reset">초기화</button>
+                </div>
+                <div class="menu-box" id="menu-box">
+                    <p id="menu-text" class="loading">잠시만 기다려봐, 밥 뭐 나오나 보고 올게...</p>
+                </div>
+            </div>
+
+            <!-- ── 주간 뷰 ── -->
+            <div id="view-week">
+                <div class="week-header">
+                    <span class="week-range" id="week-range">불러오는 중...</span>
+                    <div class="week-nav">
+                        <button class="week-nav-btn" id="btn-week-prev">&#8592;</button>
+                        <button class="week-nav-btn" id="btn-week-next">&#8594;</button>
+                    </div>
+                </div>
+                <div class="week-grid" id="week-grid"></div>
             </div>
         </main>
 
@@ -362,28 +401,27 @@
             OFFICE_CODE: 'B10',
             SCHOOL_CODE: '7010590'
         };
-        const MEAL_CODE = '2'; // 중식만
+        const MEAL_CODE = '2';
+        const DAYS = ['일', '월', '화', '수', '목', '금', '토'];
+        const MAX_OFFSET = 5;
 
-        // 현재 보고 있는 날짜 스텝 (평일 기준 ±n칸)
-        let dayOffset = 0;
-        const MAX_OFFSET = 5; // 앞뒤 최대 5일
+        let dayOffset   = 0;
+        let weekOffset  = 0; // 주간 뷰: 이번 주 기준 ±n주
+        let currentView = 'single';
 
-        // 평일(월~금) 판별
+        /* ── 유틸 ── */
         function isWeekday(date) {
-            const dow = date.getDay();
-            return dow !== 0 && dow !== 6;
+            const d = date.getDay();
+            return d !== 0 && d !== 6;
         }
 
-        // 오늘 기준 날짜 계산 (오후 2시 이후면 다음 평일로)
         function getBaseDate() {
             const now = new Date();
             if (now.getHours() >= 14) now.setDate(now.getDate() + 1);
-            // 주말이면 다음 월요일로
             while (!isWeekday(now)) now.setDate(now.getDate() + 1);
             return now;
         }
 
-        // offset(평일 기준 ±n)만큼 이동한 날짜 반환
         function getTargetDate(offset) {
             const base = getBaseDate();
             const step = offset >= 0 ? 1 : -1;
@@ -408,12 +446,17 @@
                 && d1.getDate()     === d2.getDate();
         }
 
-        // 버튼 활성/비활성 업데이트
-        function updateButtons() {
-            document.getElementById('btn-prev').disabled = dayOffset <= -MAX_OFFSET;
-            document.getElementById('btn-next').disabled = dayOffset >= MAX_OFFSET;
+        // 해당 날짜가 속한 주의 월요일 반환
+        function getMonday(date) {
+            const d = new Date(date);
+            const day = d.getDay();
+            const diff = day === 0 ? -6 : 1 - day;
+            d.setDate(d.getDate() + diff);
+            d.setHours(0,0,0,0);
+            return d;
         }
 
+        /* ── API ── */
         async function fetchMeal(date) {
             const yyyymmdd = formatDate(date);
             const url =
@@ -432,77 +475,142 @@
             if (data.mealServiceDietInfo) {
                 const rawMenu = data.mealServiceDietInfo[1].row[0].DDISH_NM;
                 return rawMenu
-                    .replace(/\([^)]*\)/g, '')   // 괄호 안 알레르기 번호 제거
-                    .replace(/[\d.]+(?=\s*(<br\/>|$))/g, '') // 줄 끝 숫자 제거
-                    .replace(/\d+(\.\d+)*/g, '')  // 나머지 붙어있는 숫자 제거
+                    .replace(/\([^)]*\)/g, '')
+                    .replace(/[\d.]+(?=\s*(<br\/>|$))/g, '')
+                    .replace(/\d+(\.\d+)*/g, '')
                     .replace(/<br\/>/g, '\n')
-                    .replace(/\s+\n/g, '\n')      // 줄 끝 공백 정리
+                    .replace(/\s+\n/g, '\n')
                     .trim();
             }
             return null;
         }
 
+        /* ── 일별 뷰 ── */
+        function updateNavButtons() {
+            document.getElementById('btn-prev').disabled = dayOffset <= -MAX_OFFSET;
+            document.getElementById('btn-next').disabled = dayOffset >= MAX_OFFSET;
+        }
+
         async function loadMeal(offset) {
             dayOffset = offset;
-            updateButtons();
+            updateNavButtons();
 
-            const display = document.getElementById('menu-text');
-            const menuBox = document.getElementById('menu-box');
-            const dateEl  = document.getElementById('date-display');
-            const labelEl = document.getElementById('today-label');
+            const display  = document.getElementById('menu-text');
+            const menuBox  = document.getElementById('menu-box');
+            const dateEl   = document.getElementById('date-display');
+            const resetBtn = document.getElementById('btn-reset');
 
             menuBox.classList.add('fading');
             display.className = 'loading';
             display.innerText = '불러오는 중...';
 
             const targetDate = getTargetDate(offset);
-            const today      = new Date();
+            const yyyymmdd   = formatDate(targetDate);
 
-            // 오늘/내일 라벨
-            if (isSameDay(targetDate, today)) {
-                labelEl.innerText = '— TODAY —';
-            } else {
-                const tomorrow = new Date(today);
-                tomorrow.setDate(today.getDate() + 1);
-                labelEl.innerText = isSameDay(targetDate, tomorrow) ? '— TOMORROW —' : '';
-            }
-
-            const yyyymmdd = formatDate(targetDate);
             dateEl.innerText = `${yyyymmdd.slice(0,4)}년 ${yyyymmdd.slice(4,6)}월 ${yyyymmdd.slice(6,8)}일`;
-
-            // 요일 표시
-            const DAYS = ['일', '월', '화', '수', '목', '금', '토'];
             document.getElementById('day-display').innerText = `(${DAYS[targetDate.getDay()]})`;
 
-            // 오늘 버튼 — offset이 0이 아닐 때만 보이기
-            const todayBtn = document.getElementById('btn-today');
-            todayBtn.className = offset !== 0 ? 'today-btn visible' : 'today-btn';
+            // 초기화 버튼: offset이 0이 아닐 때만 표시
+            resetBtn.className = offset !== 0 ? 'reset-btn visible' : 'reset-btn';
 
             let menu = null;
-            try {
-                menu = await fetchMeal(targetDate);
-            } catch (e) {
-                console.error(e);
-            }
+            try { menu = await fetchMeal(targetDate); } catch(e) { console.error(e); }
 
             menuBox.classList.remove('fading');
-
-            if (menu) {
-                display.className = '';
-                display.innerText = menu;
-            } else {
-                display.className = '';
-                display.innerText = '이 날은 급식 정보가 없어요 🌿\n(방학 · 공휴일 · 휴업일)';
-            }
+            display.className = '';
+            display.innerText = menu ?? '이 날은 급식 정보가 없어요 🌿\n(방학 · 공휴일 · 휴업일)';
         }
 
+        /* ── 주간 뷰 ── */
+        async function loadWeek(wOffset) {
+            weekOffset = wOffset;
+
+            const grid      = document.getElementById('week-grid');
+            const rangeEl   = document.getElementById('week-range');
+            const today     = new Date();
+            today.setHours(0,0,0,0);
+
+            // 기준 월요일 = 오늘 주의 월요일 + wOffset * 7일
+            const baseMonday = getMonday(today);
+            baseMonday.setDate(baseMonday.getDate() + wOffset * 7);
+
+            const friday = new Date(baseMonday);
+            friday.setDate(baseMonday.getDate() + 4);
+
+            // 주간 범위 표시
+            const fmt = d => `${d.getMonth()+1}/${d.getDate()}`;
+            rangeEl.innerText = `${fmt(baseMonday)} — ${fmt(friday)}`;
+
+            // 그리드 초기화 (로딩 상태)
+            grid.innerHTML = '';
+            for (let i = 0; i < 5; i++) {
+                const d = new Date(baseMonday);
+                d.setDate(baseMonday.getDate() + i);
+
+                const row = document.createElement('div');
+                row.className = 'week-row';
+                if (isSameDay(d, today)) row.classList.add('today-row-week');
+
+                row.innerHTML = `
+                    <div class="week-day-col">
+                        <div class="week-day-name">${DAYS[d.getDay()]}</div>
+                        <div class="week-day-num">${d.getDate()}</div>
+                    </div>
+                    <div class="week-divider"></div>
+                    <div class="week-menu loading-cell" id="week-cell-${i}">불러오는 중...</div>
+                `;
+                grid.appendChild(row);
+            }
+
+            // 병렬로 5일치 API 호출
+            const promises = [];
+            for (let i = 0; i < 5; i++) {
+                const d = new Date(baseMonday);
+                d.setDate(baseMonday.getDate() + i);
+                promises.push(fetchMeal(d).catch(() => null));
+            }
+            const results = await Promise.all(promises);
+
+            results.forEach((menu, i) => {
+                const cell = document.getElementById(`week-cell-${i}`);
+                if (!cell) return;
+                if (menu) {
+                    cell.className = 'week-menu';
+                    cell.innerText = menu;
+                    cell.closest('.week-row').classList.remove('no-meal');
+                } else {
+                    cell.className = 'week-menu empty-cell';
+                    cell.innerText = '급식 없음';
+                    cell.closest('.week-row').classList.add('no-meal');
+                }
+            });
+        }
+
+        /* ── 탭 전환 ── */
+        function switchView(view) {
+            currentView = view;
+            document.getElementById('view-single').style.display = view === 'single' ? '' : 'none';
+            document.getElementById('view-week').classList.toggle('active', view === 'week');
+            document.getElementById('tab-single').classList.toggle('active', view === 'single');
+            document.getElementById('tab-week').classList.toggle('active', view === 'week');
+
+            if (view === 'week') loadWeek(weekOffset);
+        }
+
+        /* ── 이벤트 바인딩 ── */
         document.getElementById('btn-prev').addEventListener('click', () => {
             if (dayOffset > -MAX_OFFSET) loadMeal(dayOffset - 1);
         });
         document.getElementById('btn-next').addEventListener('click', () => {
             if (dayOffset < MAX_OFFSET) loadMeal(dayOffset + 1);
         });
-        document.getElementById('btn-today').addEventListener('click', () => loadMeal(0));
+        document.getElementById('btn-reset').addEventListener('click', () => loadMeal(0));
+
+        document.getElementById('tab-single').addEventListener('click', () => switchView('single'));
+        document.getElementById('tab-week').addEventListener('click',   () => switchView('week'));
+
+        document.getElementById('btn-week-prev').addEventListener('click', () => loadWeek(weekOffset - 1));
+        document.getElementById('btn-week-next').addEventListener('click', () => loadWeek(weekOffset + 1));
 
         document.addEventListener('DOMContentLoaded', () => loadMeal(0));
     </script>
