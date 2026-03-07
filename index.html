@@ -224,6 +224,27 @@
             100% { background-position: -200% 0; }
         }
 
+
+        /* ── 학사일정 버튼 ── */
+        .schedule-link-row {
+            display: flex; justify-content: center;
+            margin-top: 14px;
+        }
+        .schedule-link-btn {
+            display: flex; align-items: center; gap: 7px;
+            padding: 10px 22px; border-radius: 16px;
+            border: 1px solid rgba(77,184,112,0.35);
+            background: rgba(77,184,112,0.1);
+            color: rgba(120,220,150,0.9);
+            font-size: 0.78rem; font-weight: 700;
+            font-family: 'Noto Serif KR', serif;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.15s;
+            width: 100%; justify-content: center;
+        }
+        .schedule-link-btn:hover  { background: rgba(77,184,112,0.22); transform: scale(1.02); }
+        .schedule-link-btn:active { transform: scale(0.97); }
+
         /* ── 푸터 ── */
         footer {
             display: flex; justify-content: center;
@@ -280,6 +301,12 @@
                     </div>
                     <p id="menu-text" style="display:none;"></p>
                 </div>
+            </div>
+
+            <div class="schedule-link-row">
+                <a class="schedule-link-btn" href="https://kbj2425.github.io/bangsanschedule/">
+                    📅 학사일정 보기
+                </a>
             </div>
         </main>
 
